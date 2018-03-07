@@ -40,8 +40,6 @@ Scores_PointsEarned int,
 Scores_PointsPossible int,
 Classes_ID int not null CONSTRAINT FK_Scores_Classes FOREIGN KEY(Classes_ID) 
 	REFERENCES dbo.Classes,
-Student_ID int not null CONSTRAINT FK_Scores_Student FOREIGN KEY (Student_ID)
-	REFERENCES dbo.Student
 )
 
 INSERT INTO Student
@@ -59,21 +57,21 @@ Values ('Calculus I',201,'Mathematics',1),
 
 INSERT INTO Scores
 Values ('HW','Homework1',
-			'01/03/18','01/12/18','01/05/18',100,100,1,1),
+			'01/03/18','01/12/18','01/05/18',100,100,1),
 		('Quiz','Quiz 1',
-			'02/01/18','02/01/18','02/03/18',99,100,1,1),
+			'02/01/18','02/01/18','02/03/18',99,100,1),
 		('HW','Homework1',
-			'02/15/18','02/21/18','02/28/18',95,100,2,2),
+			'02/15/18','02/21/18','02/28/18',95,100,2),
 		('Exam','Final Exam',
-			'03/01/18','03/01/18','03/01/18',75,100,4,3);
+			'03/01/18','03/01/18','03/01/18',75,100,4);
 
-SELECT *
+SELECT * 
 FROM Student
-LEFT JOIN Classes
+Inner JOIN Classes
 ON Student.Student_ID = Classes.Student_ID
 LEFT JOIN Scores
-ON Scores.Classes_ID = Classes.Classes_ID
---WHERE Student.Student_ID = 1 
+ON Classes.Classes_ID = Scores.Classes_ID
+--WHERE Student.Student_ID = 2
 ORDER BY Student.Student_ID,Classes.Classes_Title,Scores.Scores_Type;
 
-
+--ORDER BY Student.Student_ID
